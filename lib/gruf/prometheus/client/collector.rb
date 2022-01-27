@@ -30,7 +30,8 @@ module Gruf
         def started_total(request_context:)
           push(
             grpc_client_started_total: 1,
-            custom_labels: custom_labels(request_context: request_context)
+            custom_labels: custom_labels(request_context: request_context),
+            type: 'gauge'
           )
         end
 
@@ -41,7 +42,8 @@ module Gruf
         def completed(request_context:, result:)
           push(
             grpc_client_completed: 1,
-            custom_labels: custom_labels(request_context: request_context, result: result)
+            custom_labels: custom_labels(request_context: request_context, result: result),
+            type: 'gauge'
           )
         end
 
@@ -52,7 +54,8 @@ module Gruf
         def completed_latency_seconds(request_context:, result:)
           push(
             grpc_client_completed_latency_seconds: result.elapsed.to_f,
-            custom_labels: custom_labels(request_context: request_context, result: result)
+            custom_labels: custom_labels(request_context: request_context, result: result),
+            type: 'gauge'
           )
         end
 
